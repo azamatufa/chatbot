@@ -1,11 +1,12 @@
 const express = require('express');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const admin = require('firebase-admin');
+const { Firestore } = require('@google-cloud/firestore'); // Меняем библиотеку
 
-// 1. Инициализация Firebase Admin (для Firestore)
-// В Google Cloud он сам подхватит права доступа
-admin.initializeApp();
-const db = admin.firestore();
+// Инициализируем Firestore напрямую
+const db = new Firestore({
+    projectId: 'gen-lang-client-0917967367',
+    databaseId: 'firestore-db-001',
+});
 
 const app = express();
 const port = process.env.PORT || 8080;
